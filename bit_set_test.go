@@ -2,7 +2,6 @@ package gloom
 
 import (
 	"fmt"
-	"github.com/lixianmin/got/convert"
 	"strconv"
 	"testing"
 	"time"
@@ -28,7 +27,7 @@ func testBloomFilter(t *testing.T, estimatedKeys int, bloomFilter *BloomFilter) 
 	var startTime = time.Now()
 	var falseCounter = 0
 	for i := 0; i < estimatedKeys; i++ {
-		var data = convert.Bytes(strconv.Itoa(i * 100))
+		var data = []byte(strconv.Itoa(i * 100))
 
 		var existsBefore, err = bloomFilter.Exists(data)
 		if err != nil {
@@ -64,7 +63,7 @@ func benchmarkBloomFilter(b *testing.B, estimatedKeys int, bloomFilter *BloomFil
 
 	var falseCounter = 0
 	for i := 0; i < estimatedKeys; i++ {
-		var data = convert.Bytes(strconv.Itoa(i * 100))
+		var data = []byte(strconv.Itoa(i * 100))
 
 		var existsBefore, err = bloomFilter.Exists(data)
 		if err != nil {
